@@ -1,0 +1,27 @@
+body{
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 80px;
+}
+
+.navbar{
+  height: 80px;
+}
+
+.jumbotron{
+  height: 200px;
+  background-color: #C5F2E2;
+}
+
+/*.create-song{
+  display: none;
+}*/
+
+.playlist{
+  padding: 20px;
+  border: solid 1px black;
+  height: 250px;
+  overflow: hidden;
+  background-image: url(http://images.amcnetworks.com/ifc.com/wp-content/uploads/2013/09/PulpFiction.jpg);
+  background-size: cover;
+  color: white;
+}

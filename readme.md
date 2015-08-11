@@ -27,7 +27,7 @@
 - Taking user inputted photo links and using that to style the playlist box
 - Updating DOM elements without interference with what's already present on the page
 
-##Stretch Goals
+#Stretch Goals
 
 - Include a rating system for songs and for playlists
 - Use soundcloud API to bring in 'sounds' directly when a user adds a song
