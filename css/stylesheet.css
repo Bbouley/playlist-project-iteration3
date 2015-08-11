@@ -12,16 +12,47 @@ body{
   background-color: #C5F2E2;
 }
 
-/*.create-song{
+.create-song{
   display: none;
-}*/
+}
+
+.temp-show{
+  overflow: scroll;
+  display: inline;
+  /*border: solid black 1px;*/
+  height:100px;
+}
+
+.create-playlist{
+  display: inline;
+}
 
 .playlist{
+  position: relative;
   padding: 20px;
-  border: solid 1px black;
   height: 250px;
-  overflow: hidden;
-  background-image: url(http://images.amcnetworks.com/ifc.com/wp-content/uploads/2013/09/PulpFiction.jpg);
+  overflow: scroll;
   background-size: cover;
-  color: white;
+  color: black;
+}
+
+.show-playlist-temp{
+  height:200px;
+  overflow: scroll;
+  padding: 20px;
+}
+
+.playlist:hover{
+  background-color: black;
+  color:white;
+}
+
+.song{
+  overflow: scroll;
+  padding:10px;
+  height:125px;
+}
+
+.btn{
+  overflow: hidden;
 }
