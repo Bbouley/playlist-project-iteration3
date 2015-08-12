@@ -3,6 +3,12 @@ body{
   padding-top: 80px;
 }
 
+form{
+  height:355px;
+  background-color: #B9BCFF;
+  border-radius: 20px;
+}
+
 .navbar{
   height: 80px;
 }
@@ -14,6 +20,7 @@ body{
 
 .create-song{
   display: none;
+  margin-top: 100px;
 }
 
 .temp-show{
@@ -26,6 +33,7 @@ body{
 .create-playlist{
   display: inline;
 }
+
 
 .playlist{
   position: relative;
@@ -55,4 +63,14 @@ body{
 
 .btn{
   overflow: hidden;
+}
+
+#show-playlists{
+  min-height: 250px;
+
+}
+
+#song-list{
+  margin-bottom: 100px;
+  min-height: 180px;
 }

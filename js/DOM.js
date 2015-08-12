@@ -1,6 +1,6 @@
 playlistArray = [];
 playlistArrayPosition = 0;
-songArray = []
+songArray = [];
 
 $(document).ready (function(){
 
@@ -66,9 +66,31 @@ $(document).ready (function(){
       $('#song-genre').val('');
       $('#song-link').val('');
 
+    });
 
+
+  $(document).on('mouseenter', '.playlist', function(event){
+    event.stopPropagation();
+    event.preventDefault();
+
+    var playlistIndex = $(this).index();
+
+    playlistArray[playlistIndex].appendDescriptionText($(this), playlistArray, playlistIndex);
 
   });
+
+  $(document).on('mouseleave', '.playlist', function(event){
+    event.stopPropagation();
+    event.preventDefault();
+
+    console.log($(this).index());
+
+    var playlistIndex = $(this).index();
+
+    playlistArray[playlistIndex].reAppendTitle($(this), playlistArray, playlistIndex);
+
+  });
+
 
   $('#finished').on('click', function(event){
 
