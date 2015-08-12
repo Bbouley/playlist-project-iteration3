@@ -12,7 +12,14 @@ Playlist.prototype.addSong= function(song){
   this.songs.push(song);
 };
 
-Playlist.prototype.appendTitle = function(DOMelement){
+Playlist.prototype.appendTemp = function(DOMelement){
   DOMelement.append('<div class = \'col-xs-4 temp-show\'>' +
                       '<h2>' + this.title + '</h2>' + '</div>');
+};
+
+Playlist.prototype.appendTitle = function(DOMelement, array, index){
+  DOMelement.append('<div class = \'playlist col-xs-4\'>' +
+                    '<h2>' + array[index].title +
+                    '</h2>' + '<p>' + array[index].mood +
+                    '</p>' + '</div>');
 };
