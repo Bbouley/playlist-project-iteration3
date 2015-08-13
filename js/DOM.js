@@ -3,6 +3,7 @@ playlistArrayPosition = 0;
 songArray = [];
 songArrayPosition = 0;
 
+
 $(document).ready (function(){
 
 
@@ -110,18 +111,35 @@ $(document).ready (function(){
 
     event.stopPropagation();
     event.preventDefault();
-    console.log('test');
 
-    var playlistIndex = ($('.playlist').index($(this)));
-    // console.log(playlistIndex);
-    var playlistSongArray = playlistArray[playlistIndex].songs;
+      var playlistIndex = ($('.playlist').index($(this)));
 
-    for (var i = 0; i < playlistSongArray.length; i++) {
+      var playlistSongArray = playlistArray[playlistIndex].songs;
 
-      playlistSongArray[i].showAfterPlaylist(($('.playlist:eq(' + playlistIndex + ')')));
-      }
+    if($(this).hasClass('notClicked')){
 
-  });
+      console.log('test');
+
+      for (var i = 0; i < playlistSongArray.length; i++) {
+
+        playlistSongArray[i].showAfterPlaylist(($('.playlist:eq(' + playlistIndex + ')')), playlistIndex);
+
+        $(this).removeClass('notClicked').addClass('clicked');
+
+        }
+      } else {
+
+        for (var j = 0; j < playlistSongArray.length; j++) {
+
+          ($('.showAfter' + playlistIndex)).remove();
+
+          }
+
+          $(this).addClass('notClicked');
+
+        }
+
+    });
 
 
   $('#finished').on('click', function(event){

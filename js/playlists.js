@@ -18,7 +18,7 @@ Playlist.prototype.appendTemp = function(DOMelement){
 };
 
 Playlist.prototype.appendTitle = function(DOMelement, array, index){
-  DOMelement.append('<div class = \'playlist col-xs-4\'>' +
+  DOMelement.append('<div class = \'playlist notClicked col-xs-4\'>' +
                     '<h2>' + array[index].title +
                     '</h2>' + '<p>' + array[index].mood +
                     '</p>' + '</div>');
