@@ -9,6 +9,10 @@ form{
   border-radius: 20px;
 }
 
+.modal {
+    overflow-y: auto;
+}
+
 .navbar{
   height: 80px;
 }
@@ -24,9 +28,8 @@ form{
 }
 
 .temp-show{
-  overflow: scroll;
+  overflow: auto;
   display: inline;
-  /*border: solid black 1px;*/
   height:100px;
 }
 
@@ -39,14 +42,14 @@ form{
   position: relative;
   padding: 20px;
   height: 250px;
-  overflow: scroll;
   background-size: cover;
   color: black;
+  border-radius: 5px;
 }
 
 .show-playlist-temp{
   height:200px;
-  overflow: scroll;
+  overflow: auto;
   padding: 20px;
 }
 
@@ -56,9 +59,11 @@ form{
 }
 
 .song{
-  overflow: scroll;
+  overflow: auto;
   padding:10px;
-  height:190px;
+  height:200px;
+  border-radius: 5px;
+  border: white 2px solid;
 }
 
 .btn{
