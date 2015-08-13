@@ -33,3 +33,4 @@ Playlist.prototype.reAppendTitle = function(DOMelement, array, index){
                     '</h2>' + '<p>' + array[index].mood +
                     '</p>');
 };
+
