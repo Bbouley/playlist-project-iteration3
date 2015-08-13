@@ -112,21 +112,22 @@ $(document).ready (function(){
     event.stopPropagation();
     event.preventDefault();
 
-      var playlistIndex = ($('.playlist').index($(this)));
+    var playlistIndex = ($('.playlist').index($(this)));
 
-      var playlistSongArray = playlistArray[playlistIndex].songs;
+    var playlistSongArray = playlistArray[playlistIndex].songs;
 
     if($(this).hasClass('notClicked')){
 
-      console.log('test');
-
       for (var i = 0; i < playlistSongArray.length; i++) {
 
-        playlistSongArray[i].showAfterPlaylist(($('.playlist:eq(' + playlistIndex + ')')), playlistIndex);
+        playlistSongArray[i].showAfterPlaylist(($('.playlist:eq(' +playlistIndex + ')')), playlistIndex);
 
         $(this).removeClass('notClicked').addClass('clicked');
 
         }
+
+        $(this).after('<div class = \'delete delete' +playlistIndex+ ' song col-xs-2\'>DELETE<br>THIS<br>PLAYLIST<div>');
+
       } else {
 
         for (var j = 0; j < playlistSongArray.length; j++) {
@@ -135,11 +136,27 @@ $(document).ready (function(){
 
           }
 
+          $('.delete').remove();
+
           $(this).addClass('notClicked');
 
         }
 
     });
+
+
+  $(document).on('click', '.delete', function(event){
+    console.log($(this).prev());
+    var previous = ($(this).prev());
+    console.log($('.playlist').index(previous));
+    var previousIndex = ($('.playlist').index(previous));
+    playlistArray.splice(previousIndex, 1);
+    previous.remove();
+    $('.showAfter' + previousIndex).remove();
+    playlistArrayPosition -=1;
+    $(this).remove();
+  });
+
 
 
   $('#finished').on('click', function(event){

@@ -15,7 +15,7 @@ Song.prototype.appendToTemp = function(DOMelement){
 };
 
 Song.prototype.appendToSongList = function(DOMelement){
-  DOMelement.append('<div class = \'song col-xs-2\'>' +
+  DOMelement.append('<div class = \'song showAfter' + playlistArrayPosition + ' col-xs-2\'>' +
                     '<p><em>Artist :</em><br>' +
                     this.artist +
                     '<br><em>Song Title :</em><br> ' +
@@ -28,7 +28,7 @@ Song.prototype.appendToSongList = function(DOMelement){
 };
 
 Song.prototype.showAfterPlaylist = function(DOMelement, number){
-  DOMelement.after('<div class = \'song showAfter'+number+' col-xs-2\'>' +
+  DOMelement.after('<div class = \'song showAfter' + number + ' col-xs-2\'>' +
                     '<p><em>Artist :</em><br>' +
                     this.artist +
                     '<br><em>Song Title :</em><br> ' +
