@@ -57,7 +57,7 @@ $(document).ready (function(){
     //appends song to temporary show area
     song.appendToTemp($('.show-playlist-temp'));
     //adds song to list of all songs at bottom of page
-    song.appendToSongList($('#song-list'));
+    song.appendToSongList($('#song-list'), songArrayPosition);
     //pushes song to song array
     songArray.push(song);
     //add counter for songs
@@ -146,20 +146,35 @@ $(document).ready (function(){
 
 
   $(document).on('click', '.delete', function(event){
-    console.log($(this).prev());
+
     var previous = ($(this).prev());
-    console.log($('.playlist').index(previous));
+
     var previousIndex = ($('.playlist').index(previous));
+
     playlistArray.splice(previousIndex, 1);
-    previous.remove();
+
     $('.showAfter' + previousIndex).remove();
-    playlistArrayPosition -=1;
+
+    previous.remove();
+
     $(this).remove();
-  });
+
+     playlistArrayPosition -=1;
+
+      // $('#songArray-list').html('');
+
+      // for (var i = 0; i < playlistArray.length; i++) {
+      //   var tempArray = playlistArray[i].songs;
+      //     for (var j = 0; j < tempArray.length; j++) {
+      //       if(tempArray[j].title ===
+      //     }
+      // }
+
+   });
 
 
 
-  $('#finished').on('click', function(event){
+  $('#submit-playlist').on('click', function(event){
 
     event.preventDefault();
     //clears temporary playlist view box
