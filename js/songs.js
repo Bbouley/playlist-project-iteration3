@@ -14,8 +14,8 @@ Song.prototype.appendToTemp = function(DOMelement){
                     this.title + '<p></div>');
 };
 
-Song.prototype.appendToSongList = function(DOMelement, songArrayNum){
-  DOMelement.append('<div class = \'song col-xs-2\' id = \'songNum'+songArrayNum + '\'>' +
+Song.prototype.appendToSongList = function(DOMelement){
+  DOMelement.append('<div class = \'song col-xs-2\'>' +
                     '<p><em>Artist :</em><br>' +
                     this.artist +
                     '<br><em>Song Title :</em><br> ' +

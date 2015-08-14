@@ -3,8 +3,24 @@ playlistArrayPosition = 0;
 songArray = [];
 songArrayPosition = 0;
 
+function changeColour(){
+  for (var i = 0; i <= songArray.length; i++) {
+      var colors = ['#A6FFC6', '#FAAEFF', '#FFB6FF', '#FFB6FF', '#E1FFC0', '#84B7F6'];
+      var rand = Math.floor(Math.random()*colors.length);
+      $('.song:eq('+i+')').css('background-color', colors[rand]);
+    }
+}
+
 
 $(document).ready (function(){
+
+  $(document).on('click', function(){
+      // changeColour();
+  });
+
+  setInterval(function(){
+    changeColour();
+  },1000);
 
 
   //grab the add-playlist button
@@ -62,14 +78,6 @@ $(document).ready (function(){
     songArray.push(song);
     //add counter for songs
     songArrayPosition += 1;
-
-    //randomly changes colour of song boxes every time submit song is clicked
-    for (var i = 0; i <= songArray.length; i++) {
-      var colors = ['#A6FFC6', '#FAAEFF', '#FFB6FF', '#FFB6FF', '#E1FFC0', '#84B7F6'];
-      var rand = Math.floor(Math.random()*colors.length);
-      $('.song:eq('+i+')').css('background-color', colors[rand]);
-    }
-
       //resets song form input values on click
       $('#song-artist').val('');
       $('#song-title').val('');
@@ -109,6 +117,8 @@ $(document).ready (function(){
   //use after() jquery to append 1 song element after that
   $(document).on('click', '.playlist' ,function(event){
 
+    // changeColour();
+
     event.stopPropagation();
     event.preventDefault();
 
@@ -126,7 +136,7 @@ $(document).ready (function(){
 
         }
 
-        $(this).after('<div class = \'delete delete' +playlistIndex+ ' song col-xs-2\'>DELETE<br>THIS<br>PLAYLIST<div>');
+        $(this).after('<div class = \'delete delete' +playlistIndex+ ' col-xs-2\'><h2>DELETE<br>THIS<br>PLAYLIST</h2><div>');
 
       } else {
 
@@ -147,9 +157,23 @@ $(document).ready (function(){
 
   $(document).on('click', '.delete', function(event){
 
+    // changeColour();
+
     var previous = ($(this).prev());
 
     var previousIndex = ($('.playlist').index(previous));
+
+    var tempSongArray = playlistArray[previousIndex].songs;
+
+    if(confirm('Are you sure you want to delete this playlist?')){
+
+    for (var i = 0; i < tempSongArray.length; i++) {
+      for (var j = 0; j < songArray.length; j++) {
+        if(songArray[j] === tempSongArray[i]){
+          songArray.splice(j, 1);
+        }
+      }
+    }
 
     playlistArray.splice(previousIndex, 1);
 
@@ -161,14 +185,12 @@ $(document).ready (function(){
 
      playlistArrayPosition -=1;
 
-      // $('#songArray-list').html('');
+      $('#song-list').html('');
 
-      // for (var i = 0; i < playlistArray.length; i++) {
-      //   var tempArray = playlistArray[i].songs;
-      //     for (var j = 0; j < tempArray.length; j++) {
-      //       if(tempArray[j].title ===
-      //     }
-      // }
+      for (var k = 0; k < songArray.length; k++) {
+        songArray[k].appendToSongList($('#song-list'));
+      }
+    }
 
    });
 
