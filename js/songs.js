@@ -15,7 +15,7 @@ Song.prototype.appendToTemp = function(DOMelement){
 };
 
 Song.prototype.appendToSongList = function(DOMelement){
-  DOMelement.append('<div class = \'song col-xs-2\'>' +
+  DOMelement.append('<div class = \'song songList col-xs-2\'>' +
                     '<p><em>Artist :</em><br>' +
                     this.artist +
                     '<br><em>Song Title :</em><br> ' +
@@ -24,7 +24,7 @@ Song.prototype.appendToSongList = function(DOMelement){
                     this.genre +
                     '<br><em>Link :</em><br>' +
                     '<a href=' + this.link +'>'+
-                    'Listen Now</a><p></div>');
+                    'Listen Now</a><p><div class = \'remove-song col-xs-12\'>DELETE SONG</div></div>');
 };
 
 Song.prototype.showAfterPlaylist = function(DOMelement, playlistIndex){

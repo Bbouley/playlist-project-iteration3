@@ -1,8 +1,22 @@
 playlistArray = [];
 playlistArrayPosition = 0;
 songArray = [];
-songArrayPosition = 0;
 playlist = {};
+
+var myFirebaseRef = new Firebase("https://g11playlist.firebaseio.com/");
+
+var firebasePlaylist = myFirebaseRef.child('Playlists');
+
+var firebaseSongs = myFirebaseRef.child('Songs');
+
+var firebasePlaylistArrayPosition = myFirebaseRef.child('Playlist Array Position');
+
+firebasePlaylist.set({test:'test'});
+
+firebaseSongs.set({test:'test'});
+
+firebasePlaylistArrayPosition.set({number:1});
+
 
 function changeColour(){
   for (var i = 0; i <= songArray.length; i++) {
@@ -14,18 +28,10 @@ function changeColour(){
 
 
 $(document).ready (function(){
-
-  $(document).on('click', function(){
-      // changeColour();
-  });
-
-  setInterval(function(){
-    changeColour();
-  },1000);
-
-
   //grab the add-playlist button
   $('#add-playlist').on('click', function(event){
+
+     changeColour();
 
     event.preventDefault();
     //creates a new playlist object using inputs from the form
@@ -56,6 +62,8 @@ $(document).ready (function(){
 
   $('#submit-song').on('click', function(event){
 
+     changeColour();
+
     event.preventDefault();
 
     //creates a new song instance using form values
@@ -71,11 +79,9 @@ $(document).ready (function(){
     //appends song to temporary show area
     song.appendToTemp($('.show-playlist-temp'));
     //adds song to list of all songs at bottom of page
-    song.appendToSongList($('#song-list'), songArrayPosition);
+    song.appendToSongList($('#song-list'));
     //pushes song to song array
     songArray.push(song);
-    //add counter for songs
-    songArrayPosition += 1;
       //resets song form input values on click
       $('#song-artist').val('');
       $('#song-title').val('');
@@ -106,16 +112,10 @@ $(document).ready (function(){
 
   });
 
-  //clicking on a playlist displays the songs in that playlist.songs array
-  //songs are displayed on the line underneath the playlist or after the playlist, so box size will have to have the same height as the playlist box
-  //box colour should be different
-  //test using same song elements as used for songs at bottom of page
-  //find index of song being clicked
-  //this gives the index at which we want to display all songs in playlist.songs
-  //use after() jquery to append 1 song element after that
+
   $(document).on('click', '.playlist' ,function(event){
 
-    // changeColour();
+    changeColour();
 
     event.stopPropagation();
     event.preventDefault();
@@ -126,13 +126,13 @@ $(document).ready (function(){
 
     if($(this).hasClass('notClicked')){
 
-      for (var i = 0; i < playlistSongArray.length; i++) {
+      for (var i = playlistSongArray.length-1; i >= 0; i--) {
 
         playlistSongArray[i].showAfterPlaylist(($('.playlist:eq(' +playlistIndex + ')')), playlistIndex);
 
-        $(this).removeClass('notClicked').addClass('clicked');
-
         }
+
+        $(this).removeClass('notClicked').addClass('clicked');
 
         $(this).after('<div class = \'delete delete' +playlistIndex+ ' col-xs-2\'><h2>DELETE<br>THIS<br>PLAYLIST</h2><div>');
 
@@ -155,7 +155,7 @@ $(document).ready (function(){
 
   $(document).on('click', '.delete', function(event){
 
-    // changeColour();
+    changeColour();
 
     var previous = ($(this).prev());
 
@@ -207,6 +207,48 @@ $(document).ready (function(){
     //adds one to playlistArrayPosition
     playlistArrayPosition += 1;
 
+  });
+
+  $(document).on('click', '.remove-song', function(event){
+
+    event.preventDefault();
+
+    var songArrayIndex = ($('.songList').index($(this).parent()));
+
+    var thisSong = songArray[songArrayIndex];
+
+    for (var i = 0; i < playlistArray.length; i++) {
+
+      for (var j = 0; j <= playlistArray[i].songs.length; j++) {
+
+        if (playlistArray[i].songs[j] === thisSong){
+          playlistArray[i].songs.splice(j, 1);
+
+          var newSongsArray = playlistArray[i].songs;
+          console.log(newSongsArray.length);
+
+          if ($('.playlist:eq(' + i + ')').hasClass('clicked')){
+
+           $('.showAfter'+i).remove();
+           $('.delete'+i).remove();
+
+            for (var m = newSongsArray.length-1; m >= 0; m--) {
+              newSongsArray[m].showAfterPlaylist(($('.playlist:eq(' + i + ')')), i);
+            }
+            ($('.playlist:eq(' + i + ')').after('<div class = \'delete delete' +i+ ' col-xs-2\'><h2>DELETE<br>THIS<br>PLAYLIST</h2><div>'));
+        }
+      }
+
+    }
+
+    songArray.splice(songArrayIndex, 1);
+
+    $('#song-list').html('');
+
+      for (var k = 0; k < songArray.length; k++) {
+        songArray[k].appendToSongList($('#song-list'));
+      }
+    }
   });
 
 
