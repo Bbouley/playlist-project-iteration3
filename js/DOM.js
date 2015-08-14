@@ -2,6 +2,7 @@ playlistArray = [];
 playlistArrayPosition = 0;
 songArray = [];
 songArrayPosition = 0;
+playlist = {};
 
 function changeColour(){
   for (var i = 0; i <= songArray.length; i++) {
@@ -28,7 +29,7 @@ $(document).ready (function(){
 
     event.preventDefault();
     //creates a new playlist object using inputs from the form
-    var playlist = new Playlist(
+      playlist = new Playlist(
       $('#playlist-creator').val(),
       $('#playlist-name').val(),
       $('#playlist-picture').val(),
@@ -39,9 +40,6 @@ $(document).ready (function(){
     playlistArray.push(playlist);
     //adds playlist title to temporary show area underneath forms
     playlist.appendTemp($('.show-playlist-temp'));
-    //adds playlist title and mood of playlist to a playlist box and appends this to DOM
-    playlist.appendTitle($('#show-playlists'), playlistArray, playlistArrayPosition);
-
       //resets form values
       $('#playlist-creator').val('');
       $('#playlist-name').val('');
@@ -146,9 +144,9 @@ $(document).ready (function(){
 
           }
 
-          $('.delete').remove();
+          $('.delete'+playlistIndex).remove();
 
-          $(this).addClass('notClicked');
+          $(this).addClass('notClicked').removeClass('clicked');
 
         }
 
@@ -197,6 +195,8 @@ $(document).ready (function(){
 
 
   $('#submit-playlist').on('click', function(event){
+
+    playlist.appendTitle($('#show-playlists'), playlistArray, playlistArrayPosition);
 
     event.preventDefault();
     //clears temporary playlist view box
