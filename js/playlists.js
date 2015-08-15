@@ -2,7 +2,7 @@
 var Playlist = function(creator, title, picture, mood, description){
   this.creator = creator;
   this.title = title;
-  this.picture = picture || undefined;
+  this.picture = picture || null;
   this.mood = mood;
   this.description = description;
   this.songs = [];

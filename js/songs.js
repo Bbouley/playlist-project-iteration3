@@ -3,7 +3,7 @@ function Song(artist, title, genre, link){
   this.artist = artist;
   this.title = title;
   this.genre = genre;
-  this.link = link || undefined;
+  this.link = link || 'https://www.youtube.com/watch?v=U_xoICJChu8';
 }
 
 Song.prototype.appendToTemp = function(DOMelement){
@@ -23,7 +23,8 @@ Song.prototype.appendToSongList = function(DOMelement){
                     '<br><em>Genre :</em><br>' +
                     this.genre +
                     '<br><em>Link :</em><br>' +
-                    '<a href=' + this.link +'>'+
+                    '<a href=\'' + this.link +
+                    '\' target=\'_blank\'>'+
                     'Listen Now</a><p><div class = \'remove-song col-xs-12\'>DELETE SONG</div></div>');
 };
 
@@ -36,6 +37,7 @@ Song.prototype.showAfterPlaylist = function(DOMelement, playlistIndex){
                     '<br><em>Genre :</em><br>' +
                     this.genre +
                     '<br><em>Link :</em><br>' +
-                    '<a href=' + this.link +'>'+
+                    '<a href =\' ' + this.link +
+                    '\' target=\'_blank\'>'+
                     'Listen Now</a><p></div>');
 };

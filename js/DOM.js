@@ -1,5 +1,5 @@
 playlistArray = [];
-playlistArrayPosition = 0;
+playlistArrayPosition = playlistArray.length;
 songArray = [];
 playlist = {};
 
@@ -9,13 +9,7 @@ var firebasePlaylist = myFirebaseRef.child('Playlists');
 
 var firebaseSongs = myFirebaseRef.child('Songs');
 
-var firebasePlaylistArrayPosition = myFirebaseRef.child('Playlist Array Position');
-
-firebasePlaylist.set({test:'test'});
-
-firebaseSongs.set({test:'test'});
-
-firebasePlaylistArrayPosition.set({number:1});
+var firebasePlaylistPosition = myFirebaseRef.child('Playlist Array Position');
 
 
 function changeColour(){
@@ -26,8 +20,29 @@ function changeColour(){
     }
 }
 
+ myFirebaseRef.on('value', function(snapshot){
+    var playlists = snapshot.val().Playlists;
+    console.log(snapshot.val().Playlists);
+
+    snapshot.forEach(function(childSnapshot){
+      var childData = childSnapshot.val();
+      console.log(childData);
+      debugger;
+
+          childSnapshot.forEach(function(secondChild){
+          var secondChildData = secondChild.val();
+          playlistArray.push(secondChildData);
+          console.log(secondChildData);
+          debugger;
+        });
+    });
+  });
+
+
+
 
 $(document).ready (function(){
+
   //grab the add-playlist button
   $('#add-playlist').on('click', function(event){
 
@@ -251,6 +266,13 @@ $(document).ready (function(){
     }
   });
 
+  $(window).unload(function(){
+
+    for (var i = 0; i < playlistArray.length; i++) {
+      firebasePlaylist.push(playlistArray[i]);
+    }
+
+  });
 
 
 });
