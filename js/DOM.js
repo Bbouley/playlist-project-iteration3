@@ -2,14 +2,9 @@ playlistArray = [];
 playlistArrayPosition = playlistArray.length;
 songArray = [];
 playlist = {};
+firebaseArray = [];
 
 var myFirebaseRef = new Firebase("https://g11playlist.firebaseio.com/");
-
-var firebasePlaylist = myFirebaseRef.child('Playlists');
-
-var firebaseSongs = myFirebaseRef.child('Songs');
-
-var firebasePlaylistPosition = myFirebaseRef.child('Playlist Array Position');
 
 
 function changeColour(){
@@ -20,27 +15,52 @@ function changeColour(){
     }
 }
 
- myFirebaseRef.on('value', function(snapshot){
-    var playlists = snapshot.val().Playlists;
-    console.log(snapshot.val().Playlists);
+ function populatePlaylistArray(array){
+for (var i = 0; i < array.length; i++) {
+  var playlist = new Playlist(
+    array[i].creator,
+    array[i].title,
+    array[i].picture,
+    array[i].mood,
+    array[i].description
+    );
+  playlistArray.push(playlist);
+  }
+}
 
-    snapshot.forEach(function(childSnapshot){
-
-
-
-          childSnapshot.forEach(function(secondChild){
-          var secondChildData = secondChild.val();
-          playlistArray.push(secondChildData);
-          console.log(secondChildData);
-          debugger;
-        });
-    });
-  });
-
-
+function populateSongArray(array){
+  for (var i = 0; i < array.length; i++) {
+    var songObjectArray = array[i].songs;
+    var tempArray = [];
+      for (var j = 0; j < songObjectArray.length; j++) {
+        var song = new Song(
+          songObjectArray[j].artist,
+          songObjectArray[j].title,
+          songObjectArray[j].genre,
+          songObjectArray[j].link
+          );
+        tempArray.push(song);
+        songArray.push(song);
+      }
+    playlistArray[i].songs = tempArray;
+  }
+}
 
 
 $(document).ready (function(){
+
+   myFirebaseRef.on('value', function(snapshot){
+    var playlists = snapshot.val();
+
+    snapshot.forEach(function(childSnapshot){
+      var childData = childSnapshot.val();
+      console.log(childData);
+      firebaseArray.push(childData);
+    });
+    console.log('ready');
+    populatePlaylistArray(firebaseArray);
+    populateSongArray(firebaseArray);
+  });
 
   //grab the add-playlist button
   $('#add-playlist').on('click', function(event){
@@ -267,8 +287,10 @@ $(document).ready (function(){
 
   $(window).unload(function(){
 
+    myFirebaseRef.set();
+
     for (var i = 0; i < playlistArray.length; i++) {
-      firebasePlaylist.push(playlistArray[i]);
+      myFirebaseRef.push(playlistArray[i]);
     }
 
   });
