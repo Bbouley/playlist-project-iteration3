@@ -25,9 +25,8 @@ function changeColour(){
     console.log(snapshot.val().Playlists);
 
     snapshot.forEach(function(childSnapshot){
-      var childData = childSnapshot.val();
-      console.log(childData);
-      debugger;
+
+
 
           childSnapshot.forEach(function(secondChild){
           var secondChildData = secondChild.val();
