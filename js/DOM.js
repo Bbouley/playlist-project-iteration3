@@ -1,5 +1,5 @@
 playlistArray = [];
-playlistArrayPosition = playlistArray.length;
+playlistArrayPosition = 0;
 songArray = [];
 playlist = {};
 firebaseArray = [];
@@ -46,6 +46,15 @@ function populateSongArray(array){
   }
 }
 
+ function populatePage(){
+     for (var i = 0; i < playlistArray.length; i++) {
+        playlistArray[i].appendTitle($('#show-playlists'), playlistArray, i);
+     }
+
+     for (var k = 0; k < songArray.length; k++) {
+          songArray[k].appendToSongList($('#song-list'));
+        }
+    }
 
 $(document).ready (function(){
 
@@ -60,7 +69,13 @@ $(document).ready (function(){
     console.log('ready');
     populatePlaylistArray(firebaseArray);
     populateSongArray(firebaseArray);
+    populatePage();
+    playlistArrayPosition = playlistArray.length;
   });
+
+
+
+
 
   //grab the add-playlist button
   $('#add-playlist').on('click', function(event){
@@ -287,11 +302,14 @@ $(document).ready (function(){
 
   $(window).unload(function(){
 
-    myFirebaseRef.set();
+    myFirebaseRef.set(null);
 
-    for (var i = 0; i < playlistArray.length; i++) {
-      myFirebaseRef.push(playlistArray[i]);
-    }
+    $.each(playlistArray, function(i, object){
+      myFirebaseRef.update(object);
+    });
+
+
+
 
   });
 
