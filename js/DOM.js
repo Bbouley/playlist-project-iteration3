@@ -290,17 +290,16 @@ $(document).ready (function(){
             ($('.playlist:eq(' + i + ')').after('<div class = \'delete delete' +i+ ' col-xs-2\'><h2>DELETE<br>THIS<br>PLAYLIST</h2><div>'));
         }
       }
-
+     }
     }
 
-    songArray.splice(songArrayIndex, 1);
+      songArray.splice(songArrayIndex, 1);
 
-    $('#song-list').html('');
+      $('#song-list').html('');
 
       for (var k = 0; k < songArray.length; k++) {
         songArray[k].appendToSongList($('#song-list'));
       }
-    }
   });
 
 });
