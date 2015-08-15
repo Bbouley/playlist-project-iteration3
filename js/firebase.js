@@ -36,3 +36,7 @@ function populateSongArray(array){
       }
   }
 }
+
+function checkIfDataExists(){
+  myFirebaseRef.child()
+.once}

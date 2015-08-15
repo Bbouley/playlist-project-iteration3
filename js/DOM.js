@@ -3,8 +3,10 @@ playlistArrayPosition = 0;
 songArray = [];
 playlist = {};
 firebaseArray = [];
+firebaseKeyArray = [];
 
 var myFirebaseRef = new Firebase("https://g11playlist.firebaseio.com/");
+var firebasePlaylists = myFirebaseRef.child('playlists');
 
 
 function changeColour(){
@@ -58,7 +60,7 @@ function populateSongArray(array){
 
 $(document).ready (function(){
 
-   myFirebaseRef.on('value', function(snapshot){
+   myFirebaseRef.once('value', function(snapshot){
     var playlists = snapshot.val();
 
     snapshot.forEach(function(childSnapshot){
@@ -71,6 +73,7 @@ $(document).ready (function(){
     populateSongArray(firebaseArray);
     populatePage();
     playlistArrayPosition = playlistArray.length;
+    myFirebaseRef.set(null);
   });
 
 
@@ -300,18 +303,11 @@ $(document).ready (function(){
     }
   });
 
-  $(window).unload(function(){
-
-    myFirebaseRef.set(null);
-
-    $.each(playlistArray, function(i, object){
-      myFirebaseRef.update(object);
-    });
-
-
-
-
-  });
-
-
 });
+
+ $(window).unload(function(){
+
+      $.each(playlistArray, function(i, object){
+          myFirebaseRef.push(object);
+        });
+  });
