@@ -6,6 +6,6 @@ window.onload = function(){
 
   var track_url = 'https://soundcloud.com/calyxteebee/sawn-off';
     SC.oEmbed(track_url, { auto_play: false, maxheight: 100 }, document.getElementById('player'));
-    debugger;
+
 
 };

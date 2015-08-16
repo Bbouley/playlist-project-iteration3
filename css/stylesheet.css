@@ -93,6 +93,19 @@ form{
 
 }
 
+.playPlaylist{
+  border: white 2px solid;
+  height: 45px;
+  font-size: 30px;
+  border-radius: 10px;
+}
+
+.playPlaylist:hover{
+  cursor: hand;
+  cursor: pointer;
+  background: #5D007A;
+}
+
 #song-list{
   margin-bottom: 100px;
   min-height: 180px;

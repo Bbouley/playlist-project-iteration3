@@ -30,15 +30,12 @@ Song.prototype.appendToSongList = function(DOMelement){
 
 Song.prototype.showAfterPlaylist = function(DOMelement, playlistIndex){
   DOMelement.after('<div class = \'song showAfter' + playlistIndex +
-                    'col-xs-2\'>' +
+                    ' col-xs-2\'>' +
                     '<p><em>Artist :</em><br>' +
                     this.artist +
                     '<br><em>Song Title :</em><br> ' +
                     this.title +
                     '<br><em>Genre :</em><br>' +
                     this.genre +
-                    '<br><em>Link :</em><br>' +
-                    '<div class = \'col-xs-12 songLink\'>LISTEN NOW' +
-                    '</div>'+
                     '</div>');
 };

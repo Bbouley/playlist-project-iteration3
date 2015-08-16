@@ -60,21 +60,21 @@ function populateSongArray(array){
 
 $(document).ready (function(){
 
-  //  myFirebaseRef.once('value', function(snapshot){
-  //   var playlists = snapshot.val();
+   myFirebaseRef.once('value', function(snapshot){
+    var playlists = snapshot.val();
 
-  //   snapshot.forEach(function(childSnapshot){
-  //     var childData = childSnapshot.val();
-  //     console.log(childData);
-  //     firebaseArray.push(childData);
-  //   });
-  //   console.log('ready');
-  //   populatePlaylistArray(firebaseArray);
-  //   populateSongArray(firebaseArray);
-  //   populatePage();
-  //   playlistArrayPosition = playlistArray.length;
-  //   myFirebaseRef.set(null);
-  // });
+    snapshot.forEach(function(childSnapshot){
+      var childData = childSnapshot.val();
+      console.log(childData);
+      firebaseArray.push(childData);
+    });
+    console.log('ready');
+    populatePlaylistArray(firebaseArray);
+    populateSongArray(firebaseArray);
+    populatePage();
+    playlistArrayPosition = playlistArray.length;
+    myFirebaseRef.set(null);
+  });
 
   SC.initialize({
     client_id: '3a76cf73e430887c16e9897fcf630bcc'
@@ -174,8 +174,6 @@ $(document).ready (function(){
 
   $(document).on('click', '.playlist' ,function(event){
 
-    changeColour();
-
     event.stopPropagation();
     event.preventDefault();
 
@@ -183,11 +181,13 @@ $(document).ready (function(){
 
     var playlistSongArray = playlistArray[playlistIndex].songs;
 
+    if(event.target === this){
+
     if($(this).hasClass('notClicked')){
 
       for (var i = playlistSongArray.length-1; i >= 0; i--) {
 
-        playlistSongArray[i].showAfterPlaylist(($('.playlist:eq(' +playlistIndex + ')')), playlistIndex);
+        playlistSongArray[i].showAfterPlaylist(($('.playlist:eq(' + playlistIndex + ')')), playlistIndex);
 
         }
 
@@ -208,6 +208,7 @@ $(document).ready (function(){
           $(this).addClass('notClicked').removeClass('clicked');
 
         }
+      }
 
     });
 
@@ -256,7 +257,7 @@ $(document).ready (function(){
     var songArrayIndex = ($('#song-list').children().index($(this).parent()));
 
     var track_url = songArray[songArrayIndex].link;
-    SC.oEmbed(track_url, { auto_play: false, maxheight: 100 }, document.getElementById('player'));
+    SC.oEmbed(track_url, { auto_play: true, maxheight: 100}, document.getElementById('player'));
 
   });
 
@@ -319,5 +320,12 @@ $(document).ready (function(){
   });
 
 });
+
+ $(window).unload(function(){
+
+      $.each(playlistArray, function(i, object){
+          myFirebaseRef.push(object);
+        });
+  });
 
 
