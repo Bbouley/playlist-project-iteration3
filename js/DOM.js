@@ -76,6 +76,13 @@ $(document).ready (function(){
   //   myFirebaseRef.set(null);
   // });
 
+  SC.initialize({
+    client_id: '3a76cf73e430887c16e9897fcf630bcc'
+    });
+
+  var track_url = 'https://soundcloud.com/calyxteebee/sawn-off';
+    SC.oEmbed(track_url, { auto_play: false, maxheight: 100 }, document.getElementById('player'));
+
 
 
 
@@ -244,6 +251,15 @@ $(document).ready (function(){
 
    });
 
+  $(document).on('click', '.songLink', function(event){
+
+    var songArrayIndex = ($('#song-list').children().index($(this).parent()));
+
+    var track_url = songArray[songArrayIndex].link;
+    SC.oEmbed(track_url, { auto_play: false, maxheight: 100 }, document.getElementById('player'));
+
+  });
+
 
 
   $('#submit-playlist').on('click', function(event){
@@ -304,9 +320,4 @@ $(document).ready (function(){
 
 });
 
- // $(window).unload(function(){
 
- //      $.each(playlistArray, function(i, object){
- //          myFirebaseRef.push(object);
- //        });
- //  });

@@ -16,8 +16,12 @@
       <div class = 'row'>
          <div class = 'col-xs-12'>
           <h1 class = 'page-heading navbar-header navbar-left'>Playlist</h1>
-            <div class = 'navbar col-xs-offset-2' id = 'player'>
-            testing
+            <div class = 'navbar col-xs-offset-2'>
+            <object height="81" width="100%" id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+              <param name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer"></param>
+              <param name="allowscriptaccess" value="always"></param>
+              <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer" type="application/x-shockwave-flash" width="100%" name="myPlayer"></embed>
+            </object>
             </div>
           </div>
       </div>
@@ -95,8 +99,8 @@
         </div>
 
         <div class = 'form-group col-xs-offest-6 col-xs-5'>
-          <label for = 'song-link'>&nbsp;Link (optional)</label>
-          <input type = 'text' class = 'form-control' id = 'song-link' placeholder = 'song-link'>
+          <label for = 'song-link'>&nbsp;Soundcloud URL (optional)</label>
+          <input type = 'text' class = 'form-control' id = 'song-link' placeholder = 'soundcloud url'>
         </div>
 
         <div class = 'form-group col-xs-offset-5 col-xs-2'>

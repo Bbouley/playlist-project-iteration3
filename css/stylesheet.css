@@ -114,3 +114,16 @@ form{
   cursor: pointer;
   border-radius: 2px;
 }
+
+.songLink{
+  color:white;
+}
+
+.songLink:hover{
+  background-color: gray;
+  color: black;
+  cursor: hand;
+  cursor: pointer;
+  border-radius: 2px;
+}
+

@@ -23,13 +23,14 @@ Song.prototype.appendToSongList = function(DOMelement){
                     '<br><em>Genre :</em><br>' +
                     this.genre +
                     '<br><em>Link :</em><br>' +
-                    '<a href=\'' + this.link +
-                    '\' target=\'_blank\'>'+
-                    'Listen Now</a><p><div class = \'remove-song col-xs-12\'>DELETE SONG</div></div>');
+                    '<div class = \'col-xs-12 songLink\'>LISTEN NOW' +
+                    '</div>'+
+                    '<div class = \'remove-song col-xs-12\'>DELETE SONG</div></div>');
 };
 
 Song.prototype.showAfterPlaylist = function(DOMelement, playlistIndex){
-  DOMelement.after('<div class = \'song showAfter' + playlistIndex + '                col-xs-2\'>' +
+  DOMelement.after('<div class = \'song showAfter' + playlistIndex +
+                    'col-xs-2\'>' +
                     '<p><em>Artist :</em><br>' +
                     this.artist +
                     '<br><em>Song Title :</em><br> ' +
@@ -37,7 +38,7 @@ Song.prototype.showAfterPlaylist = function(DOMelement, playlistIndex){
                     '<br><em>Genre :</em><br>' +
                     this.genre +
                     '<br><em>Link :</em><br>' +
-                    '<a href =\' ' + this.link +
-                    '\' target=\'_blank\'>'+
-                    'Listen Now</a><p></div>');
+                    '<div class = \'col-xs-12 songLink\'>LISTEN NOW' +
+                    '</div>'+
+                    '</div>');
 };
