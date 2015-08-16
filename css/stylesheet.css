@@ -9,12 +9,20 @@ form{
   border-radius: 20px;
 }
 
+.page-heading{
+  font-size: 50px;
+}
+
+.soundPlayer{
+  border:1px solid black;
+}
+
 .modal {
     overflow-y: auto;
 }
 
 .navbar{
-  height: 80px;
+  height: 100px;
 }
 
 .jumbotron{

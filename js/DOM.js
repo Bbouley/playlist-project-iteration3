@@ -60,21 +60,21 @@ function populateSongArray(array){
 
 $(document).ready (function(){
 
-   myFirebaseRef.once('value', function(snapshot){
-    var playlists = snapshot.val();
+  //  myFirebaseRef.once('value', function(snapshot){
+  //   var playlists = snapshot.val();
 
-    snapshot.forEach(function(childSnapshot){
-      var childData = childSnapshot.val();
-      console.log(childData);
-      firebaseArray.push(childData);
-    });
-    console.log('ready');
-    populatePlaylistArray(firebaseArray);
-    populateSongArray(firebaseArray);
-    populatePage();
-    playlistArrayPosition = playlistArray.length;
-    myFirebaseRef.set(null);
-  });
+  //   snapshot.forEach(function(childSnapshot){
+  //     var childData = childSnapshot.val();
+  //     console.log(childData);
+  //     firebaseArray.push(childData);
+  //   });
+  //   console.log('ready');
+  //   populatePlaylistArray(firebaseArray);
+  //   populateSongArray(firebaseArray);
+  //   populatePage();
+  //   playlistArrayPosition = playlistArray.length;
+  //   myFirebaseRef.set(null);
+  // });
 
 
 
@@ -304,9 +304,9 @@ $(document).ready (function(){
 
 });
 
- $(window).unload(function(){
+ // $(window).unload(function(){
 
-      $.each(playlistArray, function(i, object){
-          myFirebaseRef.push(object);
-        });
-  });
+ //      $.each(playlistArray, function(i, object){
+ //          myFirebaseRef.push(object);
+ //        });
+ //  });
