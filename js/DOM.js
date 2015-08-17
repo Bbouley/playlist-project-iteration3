@@ -328,6 +328,51 @@ $(document).ready (function(){
       }
   });
 
+
+  $(document).on('click', '.remove-songShowAfter', function(){
+
+      event.preventDefault();
+      // loops through playlist numbers to find which showafter class it has
+      for (var i = 0; i < playlistArray.length; i++) {
+        if ($(this).attr('class', '.showAfter'+i)){
+          var thisIndex = (($('.showAfter'+i)).index($(this).parent()));
+
+            playlistArray[i].songs.splice(thisIndex, 1);
+
+            songArray.splice(thisIndex, 1);
+
+            $('#song-list').html('');
+
+             for (var k = 0; k < songArray.length; k++) {
+                songArray[k].appendToSongList($('#song-list'));
+              }
+
+            $(this).parent().remove();
+
+        }
+      }
+
+    });
+
+  $(document).on('click', '.songLinkShowAfter', function(){
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    for (var i = 0; i < playlistArray.length; i++) {
+
+        if ($(this).attr('class', '.showAfter'+i)){
+
+          var thisIndex = (($('.showAfter'+i)).index($(this).parent()));
+
+          var track_url = songArray[thisIndex].link;
+          //embeds that song in the widget
+          SC.oEmbed(track_url, { auto_play: true, maxheight: 100}, document.getElementById('player'));
+        }
+      }
+  });
+
+
 });
 
 //when window is closed, it for each playlist instance in array, it pushes the playlist to firebase, so it creates a new random child node of g11-playlist and saves playlist in there

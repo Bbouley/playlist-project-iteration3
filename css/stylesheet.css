@@ -54,6 +54,7 @@ form{
   color: black;
   border-radius: 5px;
   background-color: lightgray;
+  border: white 2px solid;
 }
 
 .show-playlist-temp{
@@ -129,6 +130,18 @@ form{
   border-radius: 2px;
 }
 
+.remove-songShowAfter{
+  color:white;
+}
+
+.remove-songShowAfter:hover{
+  background-color: red;
+  color: black;
+  cursor: hand;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
 .songLink{
   color:white;
 }
@@ -141,3 +154,14 @@ form{
   border-radius: 2px;
 }
 
+.songLinkShowAfter{
+  color:white;
+}
+
+.songLinkShowAfter:hover{
+  background-color: gray;
+  color: black;
+  cursor: hand;
+  cursor: pointer;
+  border-radius: 2px;
+}

@@ -37,5 +37,7 @@ Song.prototype.showAfterPlaylist = function(DOMelement, playlistIndex){
                     this.title +
                     '<br><em>Genre :</em><br>' +
                     this.genre +
-                    '</div>');
+                    '<div class = \'col-xs-12 songLinkShowAfter\'>LISTEN NOW' +
+                    '</div>'+
+                    '<div class = \'remove-songShowAfter col-xs-12\'>DELETE SONG</div></div>');
 };
