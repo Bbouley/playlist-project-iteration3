@@ -25,9 +25,7 @@ Playlist.prototype.appendTitle = function(DOMelement, array, index){
                     };
 
 Playlist.prototype.appendDescriptionText = function(DOMelement, array, index){
-  DOMelement.html('<p>'+array[index].description+'</p>'+
-                  '<br><br><br><div class = \'playPlaylist col-xs-offset-2 col-xs-8\'>PLAY SONGS</div>'
-    );
+  DOMelement.html('<p>'+array[index].description+'</p>');
 };
 
 Playlist.prototype.reAppendTitle = function(DOMelement, array, index){
