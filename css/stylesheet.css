@@ -5,7 +5,7 @@ body{
 
 form{
   height:355px;
-  background-color: #CCD0FA;
+  background-color: #8BDCFF;
   border-radius: 20px;
 }
 
@@ -53,7 +53,8 @@ form{
   background-size: cover;
   color: black;
   border-radius: 5px;
-  background-color: lightgray;
+  background-color: #8BDCFF;
+  opacity: 0.8;
   border: white 2px solid;
 }
 
@@ -116,6 +117,8 @@ form{
 .delete:hover{
   background-color: red;
   color :black;
+  cursor: hand;
+  cursor: pointer;
 }
 
 .remove-song{

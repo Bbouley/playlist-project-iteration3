@@ -9,7 +9,7 @@ var myFirebaseRef = new Firebase("https://g11playlist.firebaseio.com/");
 //function that will randomly change colour of any song box with class .song
 function changeColour(){
   for (var i = 0; i <= songArray.length; i++) {
-      var colors = ['#A6FFC6', '#FAAEFF', '#FFB6FF', '#FFB6FF', '#E1FFC0', '#84B7F6'];
+      var colors = ['#A6FFC6', '#FAAEFF', '#FFB6FF', '#FFB6FF', '#E1FFC0', '#84B7F6', '#ABD7FF', '#7EFFC7'];
       var rand = Math.floor(Math.random()*colors.length);
       $('.song:eq('+i+')').css('background-color', colors[rand]);
     }
@@ -180,6 +180,8 @@ $(document).ready (function(){
   //on clicking anything with playlist class
   $(document).on('click', '.playlist' ,function(event){
 
+    changeColour();
+
     event.stopPropagation();
     event.preventDefault();
     //finds the index of playlist in playlist array, by finding the index of where the div is appended. These indices should be the same as all playlists are appended to the DOM
@@ -329,47 +331,72 @@ $(document).ready (function(){
   });
 
 
+
   $(document).on('click', '.remove-songShowAfter', function(){
 
       event.preventDefault();
-      // loops through playlist numbers to find which showafter class it has
-      for (var i = 0; i < playlistArray.length; i++) {
-        if ($(this).attr('class', '.showAfter'+i)){
-          var thisIndex = (($('.showAfter'+i)).index($(this).parent()));
+      var classes = $(this).parent().attr('class').split(' ');
+      var showAfterClass = classes[1];
+      var classArray = ($('.'+showAfterClass+''));
 
-            playlistArray[i].songs.splice(thisIndex, 1);
+      var thisPlaylistIndex = parseInt(showAfterClass.replace(/\D/g,''));
 
-            songArray.splice(thisIndex, 1);
+      var thisIndex = classArray.index($(this).parent());
 
-            $('#song-list').html('');
+      var thisSong = playlistArray[thisPlaylistIndex].songs[thisIndex];
 
-             for (var k = 0; k < songArray.length; k++) {
-                songArray[k].appendToSongList($('#song-list'));
-              }
+      if(confirm('Are you sure you want to delete this song?')){
 
-            $(this).parent().remove();
-
+      for (var i = 0; i < songArray.length; i++) {
+        if(songArray[i] === thisSong){
+          songArray.splice(i, 1);
         }
       }
+        $('#song-list').html('');
 
-    });
+      for (var k = 0; k < songArray.length; k++) {
+        songArray[k].appendToSongList($('#song-list'));
+      }
+
+      playlistArray[thisPlaylistIndex].songs.splice(thisIndex, 1);
+
+      $('.delete'+thisPlaylistIndex).remove();
+      classArray.remove();
+
+      thisSongsArray = playlistArray[thisPlaylistIndex].songs;
+        for (var m = thisSongsArray.length-1; m >= 0; m--) {
+          thisSongsArray[m].showAfterPlaylist(($('.playlist:eq(' + thisPlaylistIndex + ')')), thisPlaylistIndex);
+        }
+        ($('.playlist:eq(' + thisPlaylistIndex + ')').after('<div class = \'delete delete' +thisPlaylistIndex+ ' col-xs-2\'><h2>DELETE<br>THIS<br>PLAYLIST</h2><div>'));
+
+       }
+
+      });
+
 
   $(document).on('click', '.songLinkShowAfter', function(){
 
     event.preventDefault();
     event.stopPropagation();
 
-    for (var i = 0; i < playlistArray.length; i++) {
+    console.log('test');
 
-        if ($(this).attr('class', '.showAfter'+i)){
+      var classes = $(this).parent().attr('class').split(' ');
+      var showAfterClass = classes[1];
+      var classArray = ($('.'+showAfterClass+''));
 
-          var thisIndex = (($('.showAfter'+i)).index($(this).parent()));
+      var thisPlaylistIndex = parseInt(showAfterClass.replace(/\D/g,''));
 
-          var track_url = songArray[thisIndex].link;
+      var thisIndex = classArray.index($(this).parent());
+
+      var thisSong = playlistArray[thisPlaylistIndex].songs[thisIndex];
+
+
+
+      var track_url = thisSong.link;
           //embeds that song in the widget
-          SC.oEmbed(track_url, { auto_play: true, maxheight: 100}, document.getElementById('player'));
-        }
-      }
+      SC.oEmbed(track_url, { auto_play: true, maxheight: 100}, document.getElementById('player'));
+
   });
 
 
